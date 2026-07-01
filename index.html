@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مهرآموز | آکادمی آنلاین</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #f59e0b;
+            --primary-dark: #d97706;
+            --secondary: #0ea5e9;
+            --accent: #8b5cf6;
+            --success: #10b981;
+            --bg: #f8fafc;
+            --card-bg: rgba(255, 255, 255, 0.92);
+            --text: #0f172a;
+            --text-light: #64748b;
+            --shadow: 0 20px 60px -20px rgba(245, 158, 11, 0.2);
+            --radius: 24px;
+            --transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Tahoma', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* ============================================
+           HEADER FIXED
+           ============================================ */
+        .header-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--primary);
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .header-logo .logo-icon {
+            font-size: 32px;
+        }
+
+        .header-logo .logo-sub {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--text-light);
+            display: block;
+            margin-top: -4px;
+        }
+
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .header-nav .nav-btn {
+            padding: 8px 20px;
+            border-radius: 60px;
+            border: none;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+            background: transparent;
+            color: var(--text);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .header-nav .nav-btn:hover {
+            background: rgba(245, 158, 11, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .header-nav .nav-btn.primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 16px rgba(245, 158, 11, 0.25);
+        }
+
+        .header-nav .nav-btn.primary:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.35);
+        }
+
+        .header-nav .nav-btn.outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .header-nav .nav-btn.outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* ============================================
+           BANNER (قابل تنظیم توسط ادمین)
+           ============================================ */
+        .banner-container {
+            flex: 1;
+            min-width: 150px;
+            max-width: 500px;
+            margin-right: auto;
+        }
+
+        .banner-link {
+            display: block;
+            width: 100%;
+            height: 60px;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: var(--transition);
+            text-decoration: none;
+            position: relative;
+        }
+
+        .banner-link:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .banner-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+            padding: 0 20px;
+            text-align: center;
+            gap: 12px;
+            border-radius: 16px;
+        }
+
+        .banner-content img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+        }
+
+        .banner-content .banner-text {
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ============================================
+           MAIN CONTENT
+           ============================================ */
+        .main-content {
+            margin-top: 100px;
+            padding: 40px 24px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 60px 20px 40px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-section h1 {
+            font-size: 48px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 12px;
+        }
+
+        .hero-section p {
+            font-size: 18px;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .grades-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .grade-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            text-decoration: none;
+            color: var(--text);
+            display: block;
+            animation: fadeInUp 0.6s ease both;
+        }
+
+        .grade-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 30px 80px -20px rgba(245, 158, 11, 0.3);
+            border-color: var(--primary);
+        }
+
+        .grade-card .grade-icon {
+            font-size: 64px;
+            display: block;
+            margin-bottom: 16px;
+        }
+
+        .grade-card h2 {
+            font-size: 32px;
+            font-weight: 900;
+            margin-bottom: 6px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .grade-card p {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .grade-card .badge-count {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 4px 16px;
+            border-radius: 40px;
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* ============================================
+           ANIMATIONS
+           ============================================ */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .header-fixed {
+                flex-wrap: wrap;
+                padding: 10px 16px;
+                gap: 10px;
+            }
+
+            .header-logo {
+                font-size: 22px;
+            }
+            .header-logo .logo-sub {
+                font-size: 10px;
+            }
+
+            .banner-container {
+                min-width: 100px;
+                max-width: 100%;
+                order: 10;
+                width: 100%;
+            }
+
+            .banner-link {
+                height: 48px;
+            }
+            .banner-content {
+                font-size: 13px;
+            }
+
+            .header-nav {
+                gap: 4px;
+            }
+            .header-nav .nav-btn {
+                padding: 6px 14px;
+                font-size: 13px;
+            }
+
+            .main-content {
+                margin-top: 140px;
+                padding: 20px 16px;
+            }
+
+            .hero-section h1 {
+                font-size: 32px;
+            }
+            .hero-section p {
+                font-size: 16px;
+            }
+
+            .grades-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            .grade-card {
+                padding: 30px 20px;
+            }
+            .grade-card .grade-icon {
+                font-size: 48px;
+            }
+            .grade-card h2 {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-fixed {
+                padding: 8px 12px;
+                gap: 6px;
+            }
+            .header-logo {
+                font-size: 18px;
+            }
+            .header-logo .logo-sub {
+                display: none;
+            }
+            .header-nav .nav-btn {
+                padding: 4px 10px;
+                font-size: 12px;
+            }
+            .banner-link {
+                height: 40px;
+            }
+            .banner-content {
+                font-size: 11px;
+                gap: 6px;
+            }
+            .banner-content .banner-icon {
+                font-size: 16px;
+            }
+            .main-content {
+                margin-top: 120px;
+                padding: 12px 10px;
+            }
+            .hero-section {
+                padding: 30px 10px 20px;
+            }
+            .hero-section h1 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+    HEADER FIXED
+    ============================================ -->
+    <header class="header-fixed" id="mainHeader">
+        <!-- LOGO -->
+        <a href="index.html" class="header-logo">
+            <span class="logo-icon">🌱</span>
+            مهرآموز
+            <span class="logo-sub">آکادمی آنلاین</span>
+        </a>
+
+        <!-- NAVIGATION -->
+        <nav class="header-nav">
+            <a href="blog.html" class="nav-btn" id="blogBtn">
+                <i class="fas fa-pen-fancy"></i> وبلاگ
+            </a>
+            <a href="admin-panel.html" class="nav-btn outline" id="adminBtn" style="display:none;">
+                <i class="fas fa-crown"></i> ادمین
+            </a>
+            <button class="nav-btn primary" id="loginBtn" onclick="handleLogin()">
+                <i class="fas fa-user"></i> ورود
+            </button>
+            <button class="nav-btn outline" id="logoutBtn" style="display:none;" onclick="handleLogout()">
+                <i class="fas fa-sign-out-alt"></i> خروج
+            </button>
+        </nav>
+
+        <!-- BANNER (قابل تنظیم توسط ادمین) -->
+        <div class="banner-container">
+            <a href="#" class="banner-link" id="bannerLink" target="_blank">
+                <div class="banner-content" id="bannerContent">
+                    <span class="banner-icon">🎯</span>
+                    <span class="banner-text" id="bannerText">ثبت نام ترم جدید شروع شد!</span>
+                </div>
+            </a>
+        </div>
+    </header>
+
+    <!-- ============================================
+    MAIN CONTENT
+    ============================================ -->
+    <main class="main-content">
+        <section class="hero-section">
+            <h1>🌱 به مهرآموز خوش آمدی</h1>
+            <p>
+                آموزش هدفمند و جذاب برای پایه‌های هفتم، هشتم و نهم
+                <br>
+                همراه با فیلم‌های آموزشی، آزمون‌های آنلاین و پاسخنامه
+            </p>
+        </section>
+
+        <div class="grades-grid" id="gradesGrid">
+            <!-- کارت‌های پایه توسط جاوااسکریپت ساخته می‌شوند -->
+        </div>
+    </main>
+
+    <script>
+        // ============================================
+        // CONFIG
+        // ============================================
+        const BIN_ID = localStorage.getItem("custom_bin_id") || "6a2e83cff5f4af5e29efa0ec";
+        const API_KEY = localStorage.getItem("custom_api_key") || "$2a$10$QiD9l/D7m8hTGNnFASLf2.n5VZe6yAIUolrrbDKirrpteGeBDGcwC";
+
+        let DB = null;
+        let CURRENT_USER = null;
+
+        // ============================================
+        // LOAD DATA
+        // ============================================
+        async function loadData() {
+            try {
+                const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+                    headers: { 'X-Master-Key': API_KEY }
+                });
+                if (!res.ok) throw new Error();
+                const data = await res.json();
+                DB = data.record;
+
+                // مقداردهی اولیه
+                if (!DB.banner) {
+                    DB.banner = {
+                        link: "https://mehramoz.ir",
+                        text: "🎯 ثبت نام ترم جدید شروع شد!",
+                        icon: "🎯",
+                        active: true
+                    };
+                }
+
+                if (!DB.grades) {
+                    DB.grades = {
+                        "7": { name: "پایه هفتم", icon: "🌱", description: "شروع ماجراجویی علمی", subjects: {} },
+                        "8": { name: "پایه هشتم", icon: "🌿", description: "گام دوم دانش", subjects: {} },
+                        "9": { name: "پایه نهم", icon: "🌳", description: "آماده‌سازی برای آینده", subjects: {} }
+                    };
+                }
+
+                if (!DB.users) {
+                    DB.users = {
+                        "Admin1403": { password: "Admin1403", role: "admin", displayName: "مدیر اصلی", approved: true }
+                    };
+                }
+
+                renderBanner();
+                renderGrades();
+                checkUser();
+
+            } catch (e) {
+                console.error("Error loading data:", e);
+                showToast("⚠️ خطا در ارتباط با دیتابیس", true);
+            }
+        }
+
+        // ============================================
+        // RENDER BANNER
+        // ============================================
+        function renderBanner() {
+            if (!DB || !DB.banner) return;
+
+            const banner = DB.banner;
+            const linkEl = document.getElementById('bannerLink');
+            const contentEl = document.getElementById('bannerContent');
+            const textEl = document.getElementById('bannerText');
+
+            if (banner.active !== false) {
+                linkEl.style.display = 'block';
+                linkEl.href = banner.link || '#';
+
+                // اگر لینک تصویر داشت
+                if (banner.image) {
+                    contentEl.innerHTML = `<img src="${banner.image}" alt="بنر">`;
+                } else {
+                    contentEl.innerHTML = `
+                                <span class="banner-icon">${banner.icon || '🎯'}</span>
+                                <span class="banner-text">${banner.text || 'مهرآموز'}</span>
+                            `;
+                }
+            } else {
+                linkEl.style.display = 'none';
+            }
+        }
+
+        // ============================================
+        // RENDER GRADES
+        // ============================================
+        function renderGrades() {
+            const grid = document.getElementById('gradesGrid');
+            if (!DB || !DB.grades) return;
+
+            const grades = Object.keys(DB.grades);
+            const colors = ['#f59e0b', '#0ea5e9', '#8b5cf6'];
+
+            grid.innerHTML = grades.map((g, i) => `
+                        <a href="base-${g}.html" class="grade-card" style="animation-delay: ${i * 0.1}s">
+                            <span class="grade-icon">${DB.grades[g].icon || '📚'}</span>
+                            <h2>${DB.grades[g].name || `پایه ${g}`}</h2>
+                            <p>${DB.grades[g].description || 'دوره اول'}</p>
+                            <span class="badge-count">
+                                ${Object.keys(DB.grades[g].subjects || {}).length || 0} درس
+                            </span>
+                        </a>
+                    `).join('');
+        }
+
+        // ============================================
+        // AUTH
+        // ============================================
+        function checkUser() {
+            const savedUser = localStorage.getItem('current_user');
+            if (savedUser && DB && DB.users && DB.users[savedUser]) {
+                CURRENT_USER = savedUser;
+                updateUIForUser();
+            }
+        }
+
+        function updateUIForUser() {
+            const loginBtn = document.getElementById('loginBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const adminBtn = document.getElementById('adminBtn');
+
+            if (CURRENT_USER && DB.users[CURRENT_USER]) {
+                loginBtn.style.display = 'none';
+                logoutBtn.style.display = 'inline-flex';
+
+                if (DB.users[CURRENT_USER].role === 'admin') {
+                    adminBtn.style.display = 'inline-flex';
+                } else {
+                    adminBtn.style.display = 'none';
+                }
+            } else {
+                loginBtn.style.display = 'inline-flex';
+                logoutBtn.style.display = 'none';
+                adminBtn.style.display = 'none';
+            }
+        }
+
+        function handleLogin() {
+            if (CURRENT_USER) {
+                showToast('👋 شما قبلاً وارد شده‌اید');
+                return;
+            }
+
+            const username = prompt('👤 نام کاربری:');
+            if (!username) return;
+
+            const password = prompt('🔑 رمز عبور:');
+            if (!password) return;
+
+            if (DB.users[username] && DB.users[username].password === password) {
+                if (DB.users[username].approved === false) {
+                    return showToast('⏳ حساب شما در انتظار تأیید است', true);
+                }
+                CURRENT_USER = username;
+                localStorage.setItem('current_user', username);
+                updateUIForUser();
+                showToast(`✨ خوش آمدی ${DB.users[username].displayName || username}!`);
+            } else {
+                showToast('❌ نام کاربری یا رمز اشتباه است', true);
+            }
+        }
+
+        function handleLogout() {
+            CURRENT_USER = null;
+            localStorage.removeItem('current_user');
+            updateUIForUser();
+            showToast('🚪 خارج شدید');
+        }
+
+        // ============================================
+        // TOAST
+        // ============================================
+        function showToast(msg, isErr = false) {
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                        position: fixed;
+                        bottom: 30px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        background: ${isErr ? '#ef4444' : '#10b981'};
+                        color: ${isErr ? 'white' : '#0f172a'};
+                        padding: 14px 32px;
+                        border-radius: 60px;
+                        font-weight: 600;
+                        z-index: 9999;
+                        box-shadow: 0 20px 40px -12px rgba(0,0,0,0.2);
+                        animation: toastAnim 3.2s ease forwards;
+                        font-size: 14px;
+                    `;
+            toast.textContent = msg;
+            document.body.appendChild(toast);
+
+            setTimeout(() => toast.remove(), 3200);
+        }
+
+        // اضافه کردن انیمیشن toast
+        const style = document.createElement('style');
+        style.textContent = `
+                    @keyframes toastAnim {
+                        0% { opacity: 0; transform: translateX(-50%) translateY(30px) scale(0.9); }
+                        12% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+                        80% { opacity: 1; }
+                        100% { opacity: 0; transform: translateX(-50%) translateY(-20px) scale(0.9); }
+                    }
+                `;
+        document.head.appendChild(style);
+
+        // ============================================
+        // START
+        // ============================================
+        document.addEventListener('DOMContentLoaded', loadData);
+    </script>
+
+</body>
+</html>

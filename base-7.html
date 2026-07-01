@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پایه هفتم | مهرآموز</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #f59e0b;
+            --primary-dark: #d97706;
+            --secondary: #0ea5e9;
+            --accent: #8b5cf6;
+            --success: #10b981;
+            --bg: #f8fafc;
+            --card-bg: rgba(255, 255, 255, 0.92);
+            --text: #0f172a;
+            --text-light: #64748b;
+            --shadow: 0 20px 60px -20px rgba(245, 158, 11, 0.2);
+            --radius: 24px;
+            --transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Tahoma', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* ============================================
+           HEADER FIXED (همون هدر اصلی)
+           ============================================ */
+        .header-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--primary);
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .header-logo .logo-icon {
+            font-size: 32px;
+        }
+
+        .header-logo .logo-sub {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--text-light);
+            display: block;
+            margin-top: -4px;
+        }
+
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .header-nav .nav-btn {
+            padding: 8px 20px;
+            border-radius: 60px;
+            border: none;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+            background: transparent;
+            color: var(--text);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .header-nav .nav-btn:hover {
+            background: rgba(245, 158, 11, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .header-nav .nav-btn.primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 16px rgba(245, 158, 11, 0.25);
+        }
+
+        .header-nav .nav-btn.primary:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.35);
+        }
+
+        .header-nav .nav-btn.outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .header-nav .nav-btn.outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* ============================================
+           BANNER
+           ============================================ */
+        .banner-container {
+            flex: 1;
+            min-width: 150px;
+            max-width: 500px;
+            margin-right: auto;
+        }
+
+        .banner-link {
+            display: block;
+            width: 100%;
+            height: 60px;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: var(--transition);
+            text-decoration: none;
+            position: relative;
+        }
+
+        .banner-link:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .banner-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+            padding: 0 20px;
+            text-align: center;
+            gap: 12px;
+            border-radius: 16px;
+        }
+
+        .banner-content img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+        }
+
+        .banner-content .banner-text {
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ============================================
+           MAIN CONTENT
+           ============================================ */
+        .main-content {
+            margin-top: 100px;
+            padding: 30px 24px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .page-header h1 .grade-icon {
+            font-size: 40px;
+        }
+
+        .page-header .back-btn {
+            padding: 10px 24px;
+            border-radius: 60px;
+            border: none;
+            background: var(--text-light);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .page-header .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ============================================
+           SUBJECTS
+           ============================================ */
+        .subject-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 24px 28px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            transition: var(--transition);
+            animation: fadeInUp 0.5s ease both;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 60px -20px rgba(245, 158, 11, 0.2);
+        }
+
+        .subject-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .subject-title .badge-count {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 12px 16px;
+            background: rgba(0, 0, 0, 0.02);
+            border-radius: 16px;
+            margin-bottom: 10px;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .file-item:hover {
+            border-color: rgba(245, 158, 11, 0.2);
+            transform: translateX(4px);
+        }
+
+        .file-item .file-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .file-item .file-name {
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .file-item .file-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 2px 12px;
+            border-radius: 40px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .tag.free {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--success);
+        }
+
+        .tag.paid {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--primary);
+        }
+
+        .tag.has-answer {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--success);
+        }
+
+        .tag.no-answer {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+        }
+
+        .file-actions {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .file-actions .btn-sm {
+            padding: 6px 16px;
+            border-radius: 40px;
+            border: none;
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .file-actions .btn-sm:hover {
+            transform: scale(1.04);
+        }
+
+        .file-actions .btn-download {
+            background: var(--success);
+            color: #0f172a;
+        }
+
+        .file-actions .btn-buy {
+            background: var(--primary);
+            color: white;
+        }
+
+        .file-actions .btn-answer {
+            background: var(--secondary);
+            color: white;
+        }
+
+        /* ============================================
+           EMPTY STATE
+           ============================================ */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-light);
+        }
+
+        .empty-state .empty-icon {
+            font-size: 64px;
+            display: block;
+            margin-bottom: 16px;
+        }
+        .empty-state h3 {
+            font-size: 22px;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        /* ============================================
+           RATING & COMMENTS
+           ============================================ */
+        .rating {
+            display: flex;
+            gap: 4px;
+            margin: 8px 0 4px;
+            align-items: center;
+        }
+
+        .star {
+            font-size: 20px;
+            cursor: pointer;
+            color: #cbd5e1;
+            transition: all 0.15s ease;
+        }
+
+        .star.active,
+        .star:hover {
+            color: #fbbf24;
+            transform: scale(1.15);
+        }
+
+        .avg-rating {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-right: 12px;
+        }
+
+        .comments-section {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .comment {
+            background: rgba(0, 0, 0, 0.02);
+            border-radius: 16px;
+            padding: 10px 16px;
+            margin-bottom: 8px;
+        }
+
+        .comment-user {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .comment-date {
+            font-size: 11px;
+            color: var(--text-light);
+            margin-top: 2px;
+        }
+
+        .add-comment {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .add-comment input {
+            flex: 1;
+            padding: 10px 18px;
+            border-radius: 60px;
+            border: 2px solid transparent;
+            background: rgba(0, 0, 0, 0.04);
+            font-size: 14px;
+            transition: var(--transition);
+            min-width: 150px;
+            color: var(--text);
+        }
+
+        .add-comment input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+        }
+
+        .add-comment .btn-send {
+            padding: 10px 24px;
+            border-radius: 60px;
+            border: none;
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .add-comment .btn-send:hover {
+            transform: scale(1.04);
+        }
+
+        /* ============================================
+           ANIMATIONS
+           ============================================ */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .header-fixed {
+                flex-wrap: wrap;
+                padding: 10px 16px;
+                gap: 10px;
+            }
+
+            .header-logo {
+                font-size: 22px;
+            }
+            .header-logo .logo-sub {
+                font-size: 10px;
+            }
+
+            .banner-container {
+                min-width: 100px;
+                max-width: 100%;
+                order: 10;
+                width: 100%;
+            }
+
+            .banner-link {
+                height: 48px;
+            }
+            .banner-content {
+                font-size: 13px;
+            }
+
+            .header-nav {
+                gap: 4px;
+            }
+            .header-nav .nav-btn {
+                padding: 6px 14px;
+                font-size: 13px;
+            }
+
+            .main-content {
+                margin-top: 140px;
+                padding: 16px 12px;
+            }
+
+            .page-header h1 {
+                font-size: 24px;
+            }
+            .page-header h1 .grade-icon {
+                font-size: 30px;
+            }
+
+            .subject-card {
+                padding: 16px 18px;
+            }
+            .subject-title {
+                font-size: 18px;
+            }
+
+            .file-item {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
+            }
+            .file-item .file-info {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .file-actions {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            .file-actions .btn-sm {
+                font-size: 11px;
+                padding: 4px 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-fixed {
+                padding: 8px 12px;
+                gap: 6px;
+            }
+            .header-logo {
+                font-size: 18px;
+            }
+            .header-logo .logo-sub {
+                display: none;
+            }
+            .header-nav .nav-btn {
+                padding: 4px 10px;
+                font-size: 12px;
+            }
+            .banner-link {
+                height: 40px;
+            }
+            .banner-content {
+                font-size: 11px;
+                gap: 6px;
+            }
+            .banner-content .banner-icon {
+                font-size: 16px;
+            }
+            .main-content {
+                margin-top: 120px;
+                padding: 10px 8px;
+            }
+            .page-header h1 {
+                font-size: 20px;
+            }
+            .subject-card {
+                padding: 12px 14px;
+            }
+            .subject-title {
+                font-size: 16px;
+            }
+            .file-item .file-name {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+    HEADER FIXED
+    ============================================ -->
+    <header class="header-fixed" id="mainHeader">
+        <a href="index.html" class="header-logo">
+            <span class="logo-icon">🌱</span>
+            مهرآموز
+            <span class="logo-sub">آکادمی آنلاین</span>
+        </a>
+
+        <nav class="header-nav">
+            <a href="blog.html" class="nav-btn" id="blogBtn">
+                <i class="fas fa-pen-fancy"></i> وبلاگ
+            </a>
+            <a href="admin-panel.html" class="nav-btn outline" id="adminBtn" style="display:none;">
+                <i class="fas fa-crown"></i> ادمین
+            </a>
+            <button class="nav-btn primary" id="loginBtn" onclick="handleLogin()">
+                <i class="fas fa-user"></i> ورود
+            </button>
+            <button class="nav-btn outline" id="logoutBtn" style="display:none;" onclick="handleLogout()">
+                <i class="fas fa-sign-out-alt"></i> خروج
+            </button>
+        </nav>
+
+        <div class="banner-container">
+            <a href="#" class="banner-link" id="bannerLink" target="_blank">
+                <div class="banner-content" id="bannerContent">
+                    <span class="banner-icon">🎯</span>
+                    <span class="banner-text" id="bannerText">ثبت نام ترم جدید شروع شد!</span>
+                </div>
+            </a>
+        </div>
+    </header>
+
+    <!-- ============================================
+    MAIN CONTENT
+    ============================================ -->
+    <main class="main-content">
+        <div class="page-header">
+            <h1>
+                <span class="grade-icon">🌱</span>
+                پایه هفتم
+                <span style="font-size:16px; font-weight:400; color:var(--text-light);">
+                    (دوره اول متوسطه)
+                </span>
+            </h1>
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-right"></i> بازگشت
+            </a>
+        </div>
+
+        <div id="subjectsContainer">
+            <!-- درس‌ها توسط جاوااسکریپت ساخته می‌شوند -->
+        </div>
+    </main>
+
+    <script>
+        // ============================================
+        // CONFIG
+        // ============================================
+        const GRADE = '7';
+        const BIN_ID = localStorage.getItem("custom_bin_id") || "6a2e83cff5f4af5e29efa0ec";
+        const API_KEY = localStorage.getItem("custom_api_key") || "$2a$10$QiD9l/D7m8hTGNnFASLf2.n5VZe6yAIUolrrbDKirrpteGeBDGcwC";
+
+        let DB = null;
+        let CURRENT_USER = null;
+
+        // ============================================
+        // LOAD DATA
+        // ============================================
+        async function loadData() {
+            try {
+                const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+                    headers: { 'X-Master-Key': API_KEY }
+                });
+                if (!res.ok) throw new Error();
+                const data = await res.json();
+                DB = data.record;
+
+                if (!DB.banner) {
+                    DB.banner = { link: "https://mehramoz.ir", text: "🎯 ثبت نام ترم جدید شروع شد!", icon: "🎯", active: true };
+                }
+
+                if (!DB.grades) {
+                    DB.grades = {
+                        "7": { name: "پایه هفتم", icon: "🌱", description: "شروع ماجراجویی علمی", subjects: {} },
+                        "8": { name: "پایه هشتم", icon: "🌿", description: "گام دوم دانش", subjects: {} },
+                        "9": { name: "پایه نهم", icon: "🌳", description: "آماده‌سازی برای آینده", subjects: {} }
+                    };
+                }
+
+                if (!DB.users) {
+                    DB.users = { "Admin1403": { password: "Admin1403", role: "admin", displayName: "مدیر اصلی",
+                            approved: true } };
+                }
+
+                if (!DB.ratings) DB.ratings = {};
+                if (!DB.comments) DB.comments = {};
+
+                renderBanner();
+                renderSubjects();
+                checkUser();
+
+            } catch (e) {
+                console.error("Error:", e);
+                showToast("⚠️ خطا در ارتباط با دیتابیس", true);
+            }
+        }
+
+        // ============================================
+        // RENDER BANNER
+        // ============================================
+        function renderBanner() {
+            if (!DB || !DB.banner) return;
+            const banner = DB.banner;
+            const linkEl = document.getElementById('bannerLink');
+            const contentEl = document.getElementById('bannerContent');
+            const textEl = document.getElementById('bannerText');
+
+            if (banner.active !== false) {
+                linkEl.style.display = 'block';
+                linkEl.href = banner.link || '#';
+                if (banner.image) {
+                    contentEl.innerHTML = `<img src="${banner.image}" alt="بنر">`;
+                } else {
+                    contentEl.innerHTML = `
+                                <span class="banner-icon">${banner.icon || '🎯'}</span>
+                                <span class="banner-text">${banner.text || 'مهرآموز'}</span>
+                            `;
+                }
+            } else {
+                linkEl.style.display = 'none';
+            }
+        }
+
+        // ============================================
+        // RENDER SUBJECTS
+        // ============================================
+        function renderSubjects() {
+            const container = document.getElementById('subjectsContainer');
+            if (!DB || !DB.grades || !DB.grades[GRADE]) {
+                container.innerHTML = `
+                            <div class="empty-state">
+                                <span class="empty-icon">📚</span>
+                                <h3>هنوز درسی ثبت نشده</h3>
+                                <p>به زودی محتوای آموزشی پایه هفتم اضافه می‌شود</p>
+                            </div>
+                        `;
+                return;
+            }
+
+            const subjects = DB.grades[GRADE].subjects || {};
+            const subjectNames = Object.keys(subjects);
+
+            if (subjectNames.length === 0) {
+                container.innerHTML = `
+                            <div class="empty-state">
+                                <span class="empty-icon">📚</span>
+                                <h3>هنوز درسی ثبت نشده</h3>
+                                <p>به زودی محتوای آموزشی پایه هفتم اضافه می‌شود</p>
+                            </div>
+                        `;
+                return;
+            }
+
+            let html = '';
+            subjectNames.forEach((subject, idx) => {
+                const files = subjects[subject] || [];
+                if (files.length === 0) return;
+
+                const hasAnswer = files.some(f => f.hasAnswer === true);
+                const allHaveAnswer = files.every(f => f.hasAnswer === true);
+                const allNoAnswer = files.every(f => f.hasAnswer === false);
+
+                html += `
+                            <div class="subject-card" style="animation-delay: ${idx * 0.08}s">
+                                <div class="subject-title">
+                                    <span>${subject}</span>
+                                    <span class="badge-count">
+                                        ${files.length} فایل
+                                        ${allHaveAnswer ? '✅' : allNoAnswer ? '❌' : '🔄'}
+                                    </span>
+                                </div>
+                        `;
+
+                files.forEach((file, fileIdx) => {
+                    const fileId = `${GRADE}_${subject}_${fileIdx}`;
+                    const ratings = DB.ratings[fileId] || { avg: 0, count: 0, users: {} };
+                    const avgStars = ratings.avg;
+                    const comments = DB.comments[fileId] || [];
+
+                    const hasAnswerBadge = file.hasAnswer ?
+                        '<span class="tag has-answer">✅ پاسخنامه</span>' :
+                        '<span class="tag no-answer">❌ بدون پاسخنامه</span>';
+
+                    html += `
+                                <div class="file-item">
+                                    <div class="file-info">
+                                        <span class="file-name">${file.name}</span>
+                                        <div class="file-tags">
+                                            <span class="tag ${file.price === 'free' ? 'free' : 'paid'}">
+                                                ${file.price === 'free' ? 'رایگان' : '💰 پولی'}
+                                            </span>
+                                            ${hasAnswerBadge}
+                                        </div>
+                                    </div>
+                                    <div class="file-actions">
+                                        ${file.price === 'free' ? `
+                                            <button class="btn-sm btn-download" onclick="window.open('${file.link || '#'}','_blank')">
+                                                📥 دانلود
+                                            </button>
+                                        ` : `
+                                            <button class="btn-sm btn-buy" onclick="openBuy('${subject}','${file.name}','${file.code || ''}')">
+                                                🛒 خرید
+                                            </button>
+                                        `}
+                                        ${file.hasAnswer ? `
+                                            <button class="btn-sm btn-answer" onclick="downloadAnswer('${file.answerLink || ''}')">
+                                                📄 پاسخنامه
+                                            </button>
+                                        ` : ''}
+                                    </div>
+                                </div>
+                                <div class="rating">
+                                    ${[1,2,3,4,5].map(s =>
+                                        `<span class="star ${s <= avgStars ? 'active' : ''}" onclick="rateFile('${fileId}', ${s})">★</span>`
+                                    ).join('')}
+                                    <span class="avg-rating">(${avgStars.toFixed(1)} - ${ratings.count})</span>
+                                </div>
+                                <div class="comments-section">
+                                    <div>
+                                        ${comments.map(c => `
+                                            <div class="comment">
+                                                <span class="comment-user">${c.user}:</span> ${c.text}
+                                                <div class="comment-date">${c.date}</div>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                    <div class="add-comment">
+                                        <input id="com-${fileId}" placeholder="نظر خود را بنویس...">
+                                        <button class="btn-send" onclick="addComment('${fileId}')">ارسال</button>
+                                    </div>
+                                </div>
+                            `;
+                });
+
+                html += `</div>`;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // ============================================
+        // RATING & COMMENTS
+        // ============================================
+        function rateFile(fileId, rating) {
+            if (!DB.ratings[fileId]) DB.ratings[fileId] = { avg: 0, count: 0, users: {} };
+            const uid = getUserId();
+            if (DB.ratings[fileId].users[uid]) {
+                return showToast('قبلاً امتیاز دادی', true);
+            }
+            DB.ratings[fileId].users[uid] = rating;
+            const total = Object.values(DB.ratings[fileId].users).reduce((a, b) => a + b, 0);
+            const cnt = Object.keys(DB.ratings[fileId].users).length;
+            DB.ratings[fileId].avg = total / cnt;
+            DB.ratings[fileId].count = cnt;
+            saveData();
+            renderSubjects();
+            showToast(`⭐ امتیاز ${rating} ثبت شد`);
+        }
+
+        function addComment(fileId) {
+            const input = document.getElementById(`com-${fileId}`);
+            const text = input.value.trim();
+            if (!text) return;
+            const uid = getUserId();
+            if (!DB.comments[fileId]) DB.comments[fileId] = [];
+            DB.comments[fileId].push({
+                user: uid.slice(0, 7),
+                text,
+                date: new Date().toLocaleDateString('fa-IR')
+            });
+            saveData();
+            input.value = '';
+            renderSubjects();
+            showToast('نظر ثبت شد');
+        }
+
+        function getUserId() {
+            return localStorage.getItem('user_id') || (() => {
+                const id = 'user_' + Math.random().toString(36).substr(2, 8);
+                localStorage.setItem('user_id', id);
+                return id;
+            })();
+        }
+
+        // ============================================
+        // BUY
+        // ============================================
+        function openBuy(subject, fileName, code) {
+            const msg = `🚀 سفارش مهرآموز\nپایه: هفتم\nدرس: ${subject}\nفایل: ${fileName}\nکد: ${code || '----'}\n\nبرای خرید با پشتیبانی تماس بگیرید`;
+            alert(msg);
+            showToast('📱 کد سفارش کپی شد، با پشتیبانی تماس بگیرید');
+        }
+
+        // ============================================
+        // DOWNLOAD ANSWER
+        // ============================================
+        function downloadAnswer(link) {
+            if (!link || link.trim() === '') {
+                return showToast('⚠️ لینک پاسخنامه موجود نیست', true);
+            }
+            window.open(link.trim(), '_blank');
+            showToast('📄 پاسخنامه باز شد');
+        }
+
+        // ============================================
+        // SAVE DATA
+        // ============================================
+        async function saveData() {
+            try {
+                await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
+                    body: JSON.stringify(DB)
+                });
+            } catch (e) {
+                console.error("Save error:", e);
+            }
+        }
+
+        // ============================================
+        // AUTH
+        // ============================================
+        function checkUser() {
+            const savedUser = localStorage.getItem('current_user');
+            if (savedUser && DB && DB.users && DB.users[savedUser]) {
+                CURRENT_USER = savedUser;
+                updateUIForUser();
+            }
+        }
+
+        function updateUIForUser() {
+            const loginBtn = document.getElementById('loginBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const adminBtn = document.getElementById('adminBtn');
+
+            if (CURRENT_USER && DB.users[CURRENT_USER]) {
+                loginBtn.style.display = 'none';
+                logoutBtn.style.display = 'inline-flex';
+                adminBtn.style.display = DB.users[CURRENT_USER].role === 'admin' ? 'inline-flex' : 'none';
+            } else {
+                loginBtn.style.display = 'inline-flex';
+                logoutBtn.style.display = 'none';
+                adminBtn.style.display = 'none';
+            }
+        }
+
+        function handleLogin() {
+            if (CURRENT_USER) return showToast('👋 قبلاً وارد شده‌اید');
+            const username = prompt('👤 نام کاربری:');
+            if (!username) return;
+            const password = prompt('🔑 رمز عبور:');
+            if (!password) return;
+
+            if (DB.users[username] && DB.users[username].password === password) {
+                if (DB.users[username].approved === false) {
+                    return showToast('⏳ حساب شما در انتظار تأیید است', true);
+                }
+                CURRENT_USER = username;
+                localStorage.setItem('current_user', username);
+                updateUIForUser();
+                showToast(`✨ خوش آمدی ${DB.users[username].displayName || username}!`);
+            } else {
+                showToast('❌ نام کاربری یا رمز اشتباه است', true);
+            }
+        }
+
+        function handleLogout() {
+            CURRENT_USER = null;
+            localStorage.removeItem('current_user');
+            updateUIForUser();
+            showToast('🚪 خارج شدید');
+        }
+
+        // ============================================
+        // TOAST
+        // ============================================
+        function showToast(msg, isErr = false) {
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                        position: fixed;
+                        bottom: 30px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        background: ${isErr ? '#ef4444' : '#10b981'};
+                        color: ${isErr ? 'white' : '#0f172a'};
+                        padding: 14px 32px;
+                        border-radius: 60px;
+                        font-weight: 600;
+                        z-index: 9999;
+                        box-shadow: 0 20px 40px -12px rgba(0,0,0,0.2);
+                        animation: toastAnim 3.2s ease forwards;
+                        font-size: 14px;
+                    `;
+            toast.textContent = msg;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3200);
+        }
+
+        // ============================================
+        // START
+        // ============================================
+        document.addEventListener('DOMContentLoaded', loadData);
+    </script>
+
+</body>
+</html>

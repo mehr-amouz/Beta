@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پنل ادمین | مهرآموز</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== استایل‌ها مثل قبل ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #f59e0b;
+            --primary-dark: #d97706;
+            --secondary: #0ea5e9;
+            --accent: #8b5cf6;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --bg: #f8fafc;
+            --card-bg: rgba(255, 255, 255, 0.92);
+            --text: #0f172a;
+            --text-light: #64748b;
+            --shadow: 0 20px 60px -20px rgba(245, 158, 11, 0.2);
+            --radius: 24px;
+            --transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Tahoma', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 24px;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 30px;
+            padding: 20px 28px;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .admin-header h1 {
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .admin-header .back-btn {
+            padding: 10px 24px;
+            border-radius: 60px;
+            border: none;
+            background: var(--text-light);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .admin-header .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+        }
+
+        .admin-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 24px 28px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            transition: var(--transition);
+        }
+
+        .admin-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 20px 60px -20px rgba(245, 158, 11, 0.15);
+        }
+
+        .admin-card h3 {
+            font-size: 18px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            border-bottom: 2px solid rgba(0, 0, 0, 0.04);
+            padding-bottom: 12px;
+        }
+
+        .admin-card label {
+            display: block;
+            font-weight: 600;
+            font-size: 13px;
+            margin-top: 12px;
+            margin-bottom: 4px;
+            color: var(--text-light);
+        }
+
+        .admin-card input,
+        .admin-card select,
+        .admin-card textarea {
+            width: 100%;
+            padding: 10px 16px;
+            border-radius: 16px;
+            border: 2px solid transparent;
+            background: rgba(0, 0, 0, 0.04);
+            font-size: 14px;
+            transition: var(--transition);
+            color: var(--text);
+            font-family: inherit;
+        }
+
+        .admin-card input:focus,
+        .admin-card select:focus,
+        .admin-card textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.06);
+        }
+
+        .admin-card .btn {
+            padding: 10px 24px;
+            border-radius: 60px;
+            border: none;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .admin-card .btn:hover {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 16px rgba(245, 158, 11, 0.25);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: #0f172a;
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.25);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+            box-shadow: 0 4px 16px rgba(239, 68, 68, 0.25);
+        }
+
+        .btn-warning {
+            background: var(--warning);
+            color: #0f172a;
+            box-shadow: 0 4px 16px rgba(245, 158, 11, 0.25);
+        }
+
+        .btn-sm {
+            padding: 6px 16px;
+            font-size: 12px;
+            border-radius: 40px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-sm:hover {
+            transform: scale(1.04);
+        }
+
+        .file-item-admin {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background: rgba(0, 0, 0, 0.02);
+            border-radius: 12px;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .file-item-admin .file-name {
+            font-weight: 600;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 14px 32px;
+            border-radius: 60px;
+            font-weight: 600;
+            z-index: 9999;
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.2);
+            animation: toastAnim 3.2s ease forwards;
+            font-size: 14px;
+        }
+
+        @keyframes toastAnim {
+            0% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(30px) scale(0.9);
+            }
+            12% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0) scale(1);
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-20px) scale(0.9);
+            }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .admin-container {
+                padding: 16px 12px;
+            }
+            .admin-header h1 {
+                font-size: 22px;
+            }
+            .admin-grid {
+                grid-template-columns: 1fr;
+            }
+            .admin-card {
+                padding: 18px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="admin-container">
+        <!-- HEADER -->
+        <div class="admin-header">
+            <h1>
+                <i class="fas fa-crown" style="color:var(--primary);"></i>
+                پنل مدیریت مهرآموز
+            </h1>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                <button class="btn-sm btn-warning" onclick="saveAllData()">
+                    <i class="fas fa-save"></i> ذخیره
+                </button>
+                <a href="index.html" class="back-btn">
+                    <i class="fas fa-arrow-right"></i> بازگشت
+                </a>
+            </div>
+        </div>
+
+        <div class="admin-grid">
+            <!-- ===== بخش ۱: بنر ===== -->
+            <div class="admin-card">
+                <h3><i class="fas fa-image"></i> مدیریت بنر</h3>
+                <label>متن بنر</label>
+                <input id="bannerText" placeholder="متن بنر...">
+
+                <label>آیکون بنر (اختیاری)</label>
+                <input id="bannerIcon" placeholder="🎯">
+
+                <label>لینک بنر</label>
+                <input id="bannerLink" placeholder="https://...">
+
+                <label>لینک تصویر (اختیاری)</label>
+                <input id="bannerImage" placeholder="https://.../image.jpg">
+
+                <div style="margin-top:12px;">
+                    <label style="display:inline-flex; align-items:center; gap:8px; cursor:pointer;">
+                        <input type="checkbox" id="bannerActive" checked>
+                        فعال بودن بنر
+                    </label>
+                </div>
+
+                <button class="btn btn-primary" onclick="updateBanner()">
+                    <i class="fas fa-save"></i> بروزرسانی بنر
+                </button>
+            </div>
+
+            <!-- ===== بخش ۲: مدیریت پایه‌ها ===== -->
+            <div class="admin-card">
+                <h3><i class="fas fa-layer-group"></i> مدیریت پایه‌ها</h3>
+                <label>پایه</label>
+                <select id="gradeSelect" onchange="loadGradeData()">
+                    <option value="7">پایه هفتم</option>
+                    <option value="8">پایه هشتم</option>
+                    <option value="9">پایه نهم</option>
+                </select>
+
+                <label>نام پایه</label>
+                <input id="gradeName" placeholder="پایه هفتم">
+
+                <label>آیکون پایه</label>
+                <input id="gradeIcon" placeholder="🌱">
+
+                <label>توضیحات</label>
+                <input id="gradeDesc" placeholder="شروع ماجراجویی علمی">
+
+                <button class="btn btn-primary" onclick="updateGrade()">
+                    <i class="fas fa-save"></i> بروزرسانی پایه
+                </button>
+            </div>
+
+            <!-- ===== بخش ۳: مدیریت درس‌ها ===== -->
+            <div class="admin-card">
+                <h3><i class="fas fa-book"></i> مدیریت درس‌ها</h3>
+                <label>پایه</label>
+                <select id="subjectGradeSelect" onchange="loadAllSubjects()">
+                    <option value="7">پایه هفتم</option>
+                    <option value="8">پایه هشتم</option>
+                    <option value="9">پایه نهم</option>
+                </select>
+
+                <label>نام درس جدید</label>
+                <div style="display:flex; gap:8px;">
+                    <input id="newSubjectName" placeholder="ریاضی هفتم" style="flex:1;">
+                    <button class="btn btn-success btn-sm" onclick="addSubject()" style="margin-top:0;">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+
+                <label>انتخاب درس برای مدیریت فایل‌ها</label>
+                <select id="fileSubjectSelect" onchange="loadFilesForSubject()">
+                    <option value="">--- انتخاب درس ---</option>
+                </select>
+
+                <hr style="margin:16px 0; border-color:rgba(0,0,0,0.04);">
+
+                <label>افزودن فایل جدید به درس</label>
+                <input id="fileName" placeholder="نام فایل">
+                <select id="filePrice">
+                    <option value="free">رایگان</option>
+                    <option value="paid">پولی</option>
+                </select>
+                <input id="fileLink" placeholder="لینک (برای فایل رایگان)">
+                <input id="fileCode" placeholder="کد (برای فایل پولی)">
+                <div style="display:flex; gap:8px; align-items:center; margin-top:8px;">
+                    <label style="font-size:13px; font-weight:600;">پاسخنامه:</label>
+                    <select id="fileHasAnswer" style="width:auto; flex:1;">
+                        <option value="false">❌ ندارد</option>
+                        <option value="true">✅ دارد</option>
+                    </select>
+                </div>
+                <input id="fileAnswerLink" placeholder="لینک پاسخنامه (اختیاری)">
+                <button class="btn btn-success" onclick="addFile()">
+                    <i class="fas fa-plus"></i> افزودن فایل
+                </button>
+
+                <hr style="margin:16px 0; border-color:rgba(0,0,0,0.04);">
+
+                <label>فایل‌های درس انتخاب شده</label>
+                <div id="filesList" style="max-height:250px; overflow-y:auto;">
+                    <div class="empty-state">📭 درسی انتخاب نشده یا فایلی وجود ندارد</div>
+                </div>
+
+                <hr style="margin:16px 0; border-color:rgba(0,0,0,0.04);">
+
+                <label>حذف کامل درس</label>
+                <select id="deleteSubjectSelect" onchange="updateDeletePreview()">
+                    <option value="">--- انتخاب درس برای حذف ---</option>
+                </select>
+                <button class="btn btn-danger" onclick="deleteSubject()">
+                    <i class="fas fa-trash"></i> حذف درس
+                </button>
+            </div>
+
+            <!-- ===== بخش ۴: مدیریت کاربران ===== -->
+            <div class="admin-card">
+                <h3><i class="fas fa-users"></i> مدیریت کاربران</h3>
+                <label>نام کاربری</label>
+                <input id="newUserUsername" placeholder="نام کاربری">
+                <label>رمز عبور</label>
+                <input id="newUserPassword" type="password" placeholder="رمز عبور">
+                <label>نام نمایشی</label>
+                <input id="newUserDisplayName" placeholder="نام نمایشی">
+                <label>نقش</label>
+                <select id="newUserRole">
+                    <option value="user">کاربر</option>
+                    <option value="teacher">معلم</option>
+                    <option value="admin">ادمین</option>
+                </select>
+                <button class="btn btn-success" onclick="createUser()">
+                    <i class="fas fa-user-plus"></i> ساخت کاربر
+                </button>
+
+                <hr style="margin:16px 0; border-color:rgba(0,0,0,0.04);">
+
+                <label>لیست کاربران</label>
+                <div id="usersList" style="max-height:200px; overflow-y:auto;"></div>
+            </div>
+
+            <!-- ===== بخش ۵: تنظیمات ===== -->
+            <div class="admin-card">
+                <h3><i class="fas fa-cog"></i> تنظیمات دیتابیس</h3>
+                <label>BIN ID</label>
+                <input id="binId" placeholder="BIN ID">
+                <label>API KEY</label>
+                <input id="apiKey" placeholder="API KEY">
+                <button class="btn btn-warning" onclick="updateSettings()">
+                    <i class="fas fa-save"></i> بروزرسانی تنظیمات
+                </button>
+                <button class="btn btn-danger" onclick="resetData()" style="margin-top:8px;">
+                    <i class="fas fa-trash"></i> بازنشانی دیتابیس
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // CONFIG
+        // ============================================
+        let BIN_ID = localStorage.getItem("custom_bin_id") || "6a2e83cff5f4af5e29efa0ec";
+        let API_KEY = localStorage.getItem("custom_api_key") || "$2a$10$QiD9l/D7m8hTGNnFASLf2.n5VZe6yAIUolrrbDKirrpteGeBDGcwC";
+
+        let DB = null;
+        let CURRENT_USER = null;
+        let currentGradeForFiles = '7';
+
+        // ============================================
+        // LOAD DATA
+        // ============================================
+        async function loadData() {
+            try {
+                const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+                    headers: { 'X-Master-Key': API_KEY }
+                });
+                if (!res.ok) throw new Error();
+                const data = await res.json();
+                DB = data.record;
+
+                if (!DB.banner) {
+                    DB.banner = { link: "https://mehramoz.ir", text: "🎯 ثبت نام ترم جدید شروع شد!", icon: "🎯", active: true };
+                }
+
+                if (!DB.grades) {
+                    DB.grades = {
+                        "7": { name: "پایه هفتم", icon: "🌱", description: "شروع ماجراجویی علمی", subjects: {} },
+                        "8": { name: "پایه هشتم", icon: "🌿", description: "گام دوم دانش", subjects: {} },
+                        "9": { name: "پایه نهم", icon: "🌳", description: "آماده‌سازی برای آینده", subjects: {} }
+                    };
+                }
+
+                if (!DB.users) {
+                    DB.users = { "Admin1403": { password: "Admin1403", role: "admin", displayName: "مدیر اصلی",
+                            approved: true } };
+                }
+
+                if (!DB.ratings) DB.ratings = {};
+                if (!DB.comments) DB.comments = {};
+
+                // بررسی ادمین
+                const savedUser = localStorage.getItem('current_user');
+                if (savedUser && DB.users[savedUser] && DB.users[savedUser].role === 'admin') {
+                    CURRENT_USER = savedUser;
+                } else {
+                    window.location.href = 'index.html';
+                }
+
+                loadBannerData();
+                loadGradeData();
+                loadAllSubjects();
+                loadUsers();
+
+                document.getElementById('binId').value = BIN_ID;
+                document.getElementById('apiKey').value = API_KEY;
+
+            } catch (e) {
+                console.error("Error loading data:", e);
+                showToast("⚠️ خطا در ارتباط با دیتابیس", true);
+            }
+        }
+
+        // ============================================
+        // BANNER
+        // ============================================
+        function loadBannerData() {
+            if (!DB || !DB.banner) return;
+            document.getElementById('bannerText').value = DB.banner.text || '';
+            document.getElementById('bannerIcon').value = DB.banner.icon || '';
+            document.getElementById('bannerLink').value = DB.banner.link || '';
+            document.getElementById('bannerImage').value = DB.banner.image || '';
+            document.getElementById('bannerActive').checked = DB.banner.active !== false;
+        }
+
+        async function updateBanner() {
+            if (!DB) return;
+
+            DB.banner = {
+                text: document.getElementById('bannerText').value.trim(),
+                icon: document.getElementById('bannerIcon').value.trim(),
+                link: document.getElementById('bannerLink').value.trim(),
+                image: document.getElementById('bannerImage').value.trim(),
+                active: document.getElementById('bannerActive').checked
+            };
+
+            await saveData();
+            showToast('✅ بنر بروزرسانی شد');
+        }
+
+        // ============================================
+        // GRADES
+        // ============================================
+        function loadGradeData() {
+            const grade = document.getElementById('gradeSelect').value;
+            if (!DB || !DB.grades || !DB.grades[grade]) return;
+
+            const g = DB.grades[grade];
+            document.getElementById('gradeName').value = g.name || '';
+            document.getElementById('gradeIcon').value = g.icon || '';
+            document.getElementById('gradeDesc').value = g.description || '';
+        }
+
+        async function updateGrade() {
+            const grade = document.getElementById('gradeSelect').value;
+            if (!DB || !DB.grades) return;
+
+            DB.grades[grade] = {
+                name: document.getElementById('gradeName').value.trim(),
+                icon: document.getElementById('gradeIcon').value.trim(),
+                description: document.getElementById('gradeDesc').value.trim(),
+                subjects: DB.grades[grade]?.subjects || {}
+            };
+
+            await saveData();
+            showToast('✅ پایه بروزرسانی شد');
+        }
+
+        // ============================================
+        // SUBJECTS & FILES (اصلاح شده)
+        // ============================================
+        function loadAllSubjects() {
+            const grade = document.getElementById('subjectGradeSelect').value;
+            currentGradeForFiles = grade;
+            
+            if (!DB || !DB.grades || !DB.grades[grade]) return;
+
+            const subjects = Object.keys(DB.grades[grade].subjects || {});
+            
+            // بروزرسانی هر دو select
+            const select1 = document.getElementById('fileSubjectSelect');
+            const select2 = document.getElementById('deleteSubjectSelect');
+
+            const options = subjects.map(s => `<option value="${s}">${s}</option>`).join('');
+            const emptyOption = '<option value="">--- انتخاب درس ---</option>';
+
+            select1.innerHTML = emptyOption + options;
+            select2.innerHTML = emptyOption + options;
+
+            // بارگذاری فایل‌ها اگر درسی انتخاب شده
+            loadFilesForSubject();
+        }
+
+        function loadFilesForSubject() {
+            const grade = currentGradeForFiles || document.getElementById('subjectGradeSelect').value;
+            const subject = document.getElementById('fileSubjectSelect').value;
+            const container = document.getElementById('filesList');
+
+            if (!subject || !DB || !DB.grades || !DB.grades[grade] || !DB.grades[grade].subjects[subject]) {
+                container.innerHTML = '<div class="empty-state">📭 درسی انتخاب نشده یا فایلی وجود ندارد</div>';
+                return;
+            }
+
+            const files = DB.grades[grade].subjects[subject] || [];
+            
+            if (files.length === 0) {
+                container.innerHTML = '<div class="empty-state">📭 این درس فایلی ندارد</div>';
+                return;
+            }
+
+            container.innerHTML = files.map((f, idx) => `
+                        <div class="file-item-admin">
+                            <span class="file-name">${f.name}</span>
+                            <div>
+                                <span style="font-size:11px; color:var(--text-light); margin-left:8px;">
+                                    ${f.price === 'free' ? '🆓 رایگان' : '💰 پولی'}
+                                    ${f.hasAnswer ? '✅' : '❌'}
+                                </span>
+                                <button class="btn-sm btn-danger" onclick="deleteFile(${idx})" style="margin-right:4px;">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `).join('');
+        }
+
+        function updateDeletePreview() {
+            // فقط برای نمایش درس انتخاب شده در بخش حذف
+            const grade = document.getElementById('subjectGradeSelect').value;
+            const subject = document.getElementById('deleteSubjectSelect').value;
+            // نیازی به action خاصی نیست
+        }
+
+        async function addSubject() {
+            const grade = document.getElementById('subjectGradeSelect').value;
+            const name = document.getElementById('newSubjectName').value.trim();
+
+            if (!name) return showToast('نام درس را وارد کنید', true);
+            if (!DB.grades[grade]) DB.grades[grade] = { subjects: {} };
+            if (!DB.grades[grade].subjects) DB.grades[grade].subjects = {};
+
+            if (DB.grades[grade].subjects[name]) {
+                return showToast('این درس وجود دارد', true);
+            }
+
+            DB.grades[grade].subjects[name] = [];
+            await saveData();
+            
+            document.getElementById('newSubjectName').value = '';
+            loadAllSubjects();
+            showToast('✅ درس اضافه شد');
+        }
+
+        async function deleteSubject() {
+            const grade = document.getElementById('subjectGradeSelect').value;
+            const subject = document.getElementById('deleteSubjectSelect').value;
+
+            if (!subject) return showToast('درسی انتخاب نشده', true);
+            if (!confirm(`درس "${subject}" حذف شود؟`)) return;
+
+            delete DB.grades[grade].subjects[subject];
+            await saveData();
+            
+            loadAllSubjects();
+            showToast('✅ درس حذف شد');
+        }
+
+        async function addFile() {
+            const grade = currentGradeForFiles || document.getElementById('subjectGradeSelect').value;
+            const subject = document.getElementById('fileSubjectSelect').value;
+            const name = document.getElementById('fileName').value.trim();
+            const price = document.getElementById('filePrice').value;
+            const link = document.getElementById('fileLink').value.trim();
+            const code = document.getElementById('fileCode').value.trim();
+            const hasAnswer = document.getElementById('fileHasAnswer').value === 'true';
+            const answerLink = document.getElementById('fileAnswerLink').value.trim();
+
+            if (!subject) return showToast('درسی انتخاب نشده', true);
+            if (!name) return showToast('نام فایل را وارد کنید', true);
+
+            if (!DB.grades[grade].subjects[subject]) {
+                DB.grades[grade].subjects[subject] = [];
+            }
+
+            DB.grades[grade].subjects[subject].push({
+                name,
+                price,
+                link: price === 'free' ? link : '',
+                code: price === 'paid' ? (code || Math.random().toString(36).substr(2, 8)) : '',
+                hasAnswer,
+                answerLink: hasAnswer ? answerLink : ''
+            });
+
+            await saveData();
+
+            // پاک کردن فیلدها
+            document.getElementById('fileName').value = '';
+            document.getElementById('fileLink').value = '';
+            document.getElementById('fileCode').value = '';
+            document.getElementById('fileAnswerLink').value = '';
+
+            // رفرش لیست فایل‌ها
+            loadFilesForSubject();
+            showToast('✅ فایل اضافه شد');
+        }
+
+        async function deleteFile(index) {
+            const grade = currentGradeForFiles || document.getElementById('subjectGradeSelect').value;
+            const subject = document.getElementById('fileSubjectSelect').value;
+
+            if (!subject) return showToast('درسی انتخاب نشده', true);
+            if (!confirm('فایل حذف شود؟')) return;
+
+            const files = DB.grades[grade].subjects[subject] || [];
+            if (index < 0 || index >= files.length) return showToast('خطا در حذف فایل', true);
+
+            files.splice(index, 1);
+            
+            if (files.length === 0) {
+                // اگر همه فایل‌ها حذف شدند، درس را پاک نکنید (می‌تواند خالی بماند)
+                // اما می‌توانید درس را هم حذف کنید اگر خالی شد:
+                // delete DB.grades[grade].subjects[subject];
+            }
+
+            await saveData();
+            
+            // رفرش لیست فایل‌ها و درس‌ها
+            loadFilesForSubject();
+            loadAllSubjects(); // برای بروزرسانی تعداد فایل‌ها
+            showToast('✅ فایل حذف شد');
+        }
+
+        // ============================================
+        // USERS
+        // ============================================
+        function loadUsers() {
+            if (!DB || !DB.users) return;
+
+            const container = document.getElementById('usersList');
+            container.innerHTML = Object.entries(DB.users).map(([u, data]) => `
+                        <div class="file-item-admin">
+                            <span class="file-name">${data.displayName || u}</span>
+                            <div>
+                                <span style="font-size:11px; color:var(--text-light);">
+                                    ${data.role} ${data.approved === false ? '⏳' : '✅'}
+                                </span>
+                                ${u !== 'Admin1403' ? `
+                                    <button class="btn-sm btn-danger" onclick="deleteUser('${u}')" style="margin-right:8px;">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                ` : ''}
+                            </div>
+                        </div>
+                    `).join('');
+        }
+
+        async function createUser() {
+            const username = document.getElementById('newUserUsername').value.trim();
+            const password = document.getElementById('newUserPassword').value.trim();
+            const displayName = document.getElementById('newUserDisplayName').value.trim() || username;
+            const role = document.getElementById('newUserRole').value;
+
+            if (!username || !password) return showToast('نام کاربری و رمز الزامی است', true);
+            if (DB.users[username]) return showToast('کاربر وجود دارد', true);
+
+            DB.users[username] = {
+                password,
+                role,
+                displayName,
+                approved: true
+            };
+
+            await saveData();
+            
+            document.getElementById('newUserUsername').value = '';
+            document.getElementById('newUserPassword').value = '';
+            document.getElementById('newUserDisplayName').value = '';
+
+            loadUsers();
+            showToast(`✅ کاربر ${username} ساخته شد`);
+        }
+
+        async function deleteUser(username) {
+            if (username === 'Admin1403') return showToast('ادمین اصلی قابل حذف نیست', true);
+            if (!confirm(`کاربر "${username}" حذف شود؟`)) return;
+
+            delete DB.users[username];
+            await saveData();
+            loadUsers();
+            showToast('✅ کاربر حذف شد');
+        }
+
+        // ============================================
+        // SETTINGS
+        // ============================================
+        function updateSettings() {
+            const newBin = document.getElementById('binId').value.trim();
+            const newKey = document.getElementById('apiKey').value.trim();
+
+            if (newBin) { localStorage.setItem('custom_bin_id', newBin);
+                BIN_ID = newBin; }
+            if (newKey) { localStorage.setItem('custom_api_key', newKey);
+                API_KEY = newKey; }
+
+            showToast('تنظیمات بروز شد، صفحه دوباره بارگذاری می‌شود');
+            setTimeout(() => location.reload(), 1500);
+        }
+
+        function resetData() {
+            if (!confirm('⚠️ تمام داده‌ها پاک می‌شوند! ادامه می‌دهید؟')) return;
+
+            DB = {
+                banner: { link: "https://mehramoz.ir", text: "🎯 ثبت نام ترم جدید شروع شد!", icon: "🎯", active: true },
+                grades: {
+                    "7": { name: "پایه هفتم", icon: "🌱", description: "شروع ماجراجویی علمی", subjects: {} },
+                    "8": { name: "پایه هشتم", icon: "🌿", description: "گام دوم دانش", subjects: {} },
+                    "9": { name: "پایه نهم", icon: "🌳", description: "آماده‌سازی برای آینده", subjects: {} }
+                },
+                users: { "Admin1403": { password: "Admin1403", role: "admin", displayName: "مدیر اصلی",
+                    approved: true } },
+                ratings: {},
+                comments: {}
+            };
+
+            saveData();
+            loadData();
+            showToast('✅ دیتابیس بازنشانی شد');
+        }
+
+        // ============================================
+        // SAVE
+        // ============================================
+        async function saveData() {
+            try {
+                await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
+                    body: JSON.stringify(DB)
+                });
+                return true;
+            } catch (e) {
+                console.error("Save error:", e);
+                showToast('❌ خطا در ذخیره', true);
+                return false;
+            }
+        }
+
+        async function saveAllData() {
+            await saveData();
+            showToast('💾 همه داده‌ها ذخیره شدند');
+        }
+
+        // ============================================
+        // TOAST
+        // ============================================
+        function showToast(msg, isErr = false) {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.style.background = isErr ? '#ef4444' : '#10b981';
+            toast.style.color = isErr ? 'white' : '#0f172a';
+            toast.textContent = msg;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3200);
+        }
+
+        // ============================================
+        // START
+        // ============================================
+        document.addEventListener('DOMContentLoaded', loadData);
+    </script>
+
+</body>
+</html>
