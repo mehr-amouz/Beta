@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>مهرآموز | پایه نهم</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body, html { 
+    min-height: 100vh; 
+    width: 100%; 
+    font-family: Tahoma, sans-serif; 
+    color: #fff; 
+    overflow-x: hidden; 
+    /* پس‌زمینه گرادیانت متحرک و شیک (بدون عکس) */
+    background: linear-gradient(-45deg, #0d1117, #1a2a33, #2c5f6e, #0d1117);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+  }
+
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .header { position: fixed; top: 0; left: 0; width: 100%; padding: 25px 40px; display: flex; justify-content: space-between; align-items: center; z-index: 10; }
+  .brand-logo { font-size: 2rem; font-weight: 900; color: #fff; text-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 0 4px 10px rgba(0, 0, 0, 0.8); letter-spacing: 2px; }
+  .back-btn { padding: 10px 25px; font-size: 1rem; font-weight: bold; color: #fff; background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 50px; cursor: pointer; text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; }
+  .back-btn:hover { background: rgba(255, 255, 255, 0.25); transform: translateX(5px); }
+
+  .main-container { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 100px 20px 50px 20px; position: relative; z-index: 1; }
+  .welcome-text { text-align: center; margin-bottom: 50px; animation: fadeIn 1s ease-out; }
+  .welcome-text h1 { font-size: 4rem; font-weight: 900; margin-bottom: 10px; text-shadow: 0 0 20px rgba(74, 139, 158, 0.8); background: linear-gradient(to left, #fff, #4a8b9e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .welcome-text p { font-size: 1.2rem; color: rgba(255, 255, 255, 0.7); }
+
+  .boxes-container { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 40px; max-width: 1100px; width: 100%; }
+  .box { width: 280px; height: 280px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 25px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; color: #fff; transition: all 0.4s ease; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); cursor: pointer; position: relative; overflow: hidden; }
+  .box::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 100%); transform: skewX(-25deg); transition: 0.7s; }
+  .box:hover { background: rgba(74, 139, 158, 0.2); transform: translateY(-10px) scale(1.03); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(74, 139, 158, 0.4); border-color: rgba(74, 139, 158, 0.6); }
+  .box:hover::before { left: 150%; }
+  .box.disabled { cursor: default; }
+  .box.disabled:hover { transform: none; background: rgba(255, 255, 255, 0.05); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); border-color: rgba(255, 255, 255, 0.15); }
+  .box.disabled:hover::before { left: -100%; }
+  .box-icon { font-size: 4rem; margin-bottom: 15px; transition: transform 0.3s ease; }
+  .box:hover .box-icon { transform: scale(1.2) rotate(5deg); }
+  .box.disabled:hover .box-icon { transform: none; }
+  .box h2 { font-size: 1.8rem; font-weight: bold; text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); margin-bottom: 8px; }
+  .box p { font-size: 1rem; opacity: 0.7; text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); text-align: center; padding: 0 10px; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 768px) { .header { padding: 20px; } .brand-logo { font-size: 1.5rem; } .back-btn { font-size: 0.9rem; padding: 8px 20px; } .welcome-text h1 { font-size: 3rem; } .welcome-text p { font-size: 1rem; } .box { width: 220px; height: 220px; } .box-icon { font-size: 3rem; } .box h2 { font-size: 1.4rem; } }
+  @media (max-width: 550px) { .main-container { padding-top: 120px; } .boxes-container { flex-direction: column; gap: 20px; } .box { width: 90%; height: 130px; flex-direction: row; gap: 20px; justify-content: flex-start; padding-right: 30px; } .box-icon { margin-bottom: 0; font-size: 2.5rem; } .box h2 { font-size: 1.4rem; margin: 0; } .box p { font-size: 0.9rem; margin-top: 5px; } .box-text-wrapper { display: flex; flex-direction: column; align-items: flex-start; } }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <a href="javascript:history.back()" class="back-btn"><span>➜</span> بازگشت</a>
+    <div class="brand-logo">مهرآموز</div>
+  </div>
+
+  <div class="main-container">
+    <div class="welcome-text">
+      <h1>پایه نهم</h1>
+      <p>به بخش اختصاصی پایه نهم خوش آمدید</p>
+    </div>
+
+    <div class="boxes-container">
+      <div class="box disabled">
+        <div class="box-icon">📚</div>
+        <div class="box-text-wrapper">
+          <h2>کتاب‌ها</h2>
+          <p>در حال بروزرسانی</p>
+        </div>
+      </div>
+
+      <a href="Azmoon9.html" class="box">
+        <div class="box-icon">📝</div>
+        <div class="box-text-wrapper">
+          <h2>آزمون‌ها</h2>
+        </div>
+      </a>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>مهرآموز | آزمون‌های پایه نهم</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body, html { 
+    min-height: 100vh; 
+    width: 100%; 
+    font-family: Tahoma, sans-serif; 
+    color: #fff; 
+    overflow-x: hidden; 
+    /* پس‌زمینه گرادیانت متحرک و شیک (بدون عکس) */
+    background: linear-gradient(-45deg, #0d1117, #1a2a33, #2c5f6e, #0d1117);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+  }
+
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* =========================================
+     هدر
+     ========================================= */
+  .header { position: fixed; top: 0; left: 0; width: 100%; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; z-index: 10; background: rgba(13, 17, 23, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+  .brand-logo { font-size: 1.8rem; font-weight: 900; color: #fff; text-shadow: 0 0 15px rgba(255, 255, 255, 0.6); }
+  .back-btn { padding: 10px 25px; font-size: 1rem; font-weight: bold; color: #fff; background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 50px; cursor: pointer; text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; }
+  .back-btn:hover { background: rgba(255, 255, 255, 0.25); transform: translateX(5px); }
+
+  /* =========================================
+     محتوای اصلی
+     ========================================= */
+  .main-container { max-width: 900px; margin: 0 auto; padding: 120px 20px 60px 20px; display: flex; flex-direction: column; gap: 40px; position: relative; z-index: 1; }
+  .page-title { text-align: center; font-size: 3rem; font-weight: 900; background: linear-gradient(to left, #fff, #4a8b9e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 20px rgba(74, 139, 158, 0.3); margin-bottom: 10px; }
+
+  .section-box { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 30px; backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); }
+  .section-box h2 { font-size: 1.8rem; margin-bottom: 20px; color: #4a8b9e; border-bottom: 2px solid rgba(74, 139, 158, 0.3); padding-bottom: 10px; display: inline-block; }
+
+  .budget-img-container { text-align: center; overflow: hidden; border-radius: 15px; border: 2px solid rgba(255, 255, 255, 0.1); cursor: zoom-in; transition: transform 0.3s; }
+  .budget-img-container:hover { transform: scale(1.02); }
+  .budget-img-container img { width: 100%; height: auto; display: block; }
+
+  /* باکس توضیحات */
+  .info-alert { background: rgba(255, 193, 7, 0.1); border-right: 5px solid #ffc107; padding: 15px 20px; border-radius: 10px; font-size: 1rem; line-height: 1.6; color: #ffd54f; margin: 20px 0; }
+
+  /* جدول آزمون‌ها */
+  .table-responsive { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; margin-top: 15px; background: rgba(255, 255, 255, 0.02); border-radius: 15px; overflow: hidden; }
+  th, td { padding: 15px; text-align: right; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+  th { background: rgba(74, 139, 158, 0.3); color: #fff; font-weight: bold; font-size: 1.1rem; }
+  td { font-size: 1rem; color: rgba(255, 255, 255, 0.85); }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255, 255, 255, 0.05); }
+
+  .download-btn { display: inline-block; padding: 8px 20px; background: linear-gradient(135deg, #4a8b9e, #2c5f6e); color: #fff; text-decoration: none; border-radius: 20px; font-size: 0.9rem; font-weight: bold; transition: all 0.3s; border: 1px solid rgba(255, 255, 255, 0.2); white-space: nowrap; }
+  .download-btn:hover { background: linear-gradient(135deg, #5ca2b8, #3a7a8c); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(74, 139, 158, 0.4); }
+
+  /* وضعیت */
+  .status-text { text-align: center; font-size: 1.1rem; color: rgba(255, 255, 255, 0.6); padding: 20px; background: rgba(0, 0, 0, 0.2); border-radius: 15px; border: 1px dashed rgba(255, 255, 255, 0.2); margin-top: 20px; }
+
+  /* پشتیبانی */
+  .support-section { text-align: center; background: rgba(74, 139, 158, 0.1); border: 1px solid rgba(74, 139, 158, 0.3); border-radius: 20px; padding: 30px; margin-top: 20px; }
+  .support-section p { font-size: 1.1rem; margin-bottom: 15px; color: rgba(255, 255, 255, 0.8); }
+  .ble-btn { display: inline-block; padding: 12px 30px; background: #4a8b9e; color: #fff; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 1.1rem; transition: all 0.3s; box-shadow: 0 5px 15px rgba(74, 139, 158, 0.4); }
+  .ble-btn:hover { background: #5ca2b8; transform: scale(1.05); }
+
+  /* لایت‌باکس */
+  .lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); z-index: 1000; display: none; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s; }
+  .lightbox.active { display: flex; opacity: 1; }
+  .lightbox img { max-width: 95%; max-height: 95%; border-radius: 10px; box-shadow: 0 0 50px rgba(0, 0, 0, 0.8); }
+  .lightbox-close { position: absolute; top: 20px; right: 30px; font-size: 3rem; color: #fff; cursor: pointer; transition: color 0.3s; }
+  .lightbox-close:hover { color: #ff4b2b; }
+
+  /* ریسپانسیو */
+  @media (max-width: 768px) { .header { padding: 15px 20px; } .brand-logo { font-size: 1.4rem; } .back-btn { font-size: 0.9rem; padding: 8px 15px; } .main-container { padding-top: 90px; gap: 30px; } .page-title { font-size: 2.2rem; } .section-box { padding: 20px; } .section-box h2 { font-size: 1.5rem; } th, td { padding: 12px 8px; font-size: 0.9rem; } .download-btn { padding: 6px 12px; font-size: 0.8rem; } }
+  @media (max-width: 480px) { .page-title { font-size: 1.8rem; } th { font-size: 0.9rem; } td { font-size: 0.85rem; } .download-btn { display: block; text-align: center; margin-top: 5px; } }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <a href="javascript:history.back()" class="back-btn"><span>➜</span> بازگشت</a>
+    <div class="brand-logo">مهرآموز</div>
+  </div>
+
+  <div class="main-container">
+    <h1 class="page-title">آزمون‌های پایه نهم</h1>
+
+    <!-- بخش بودجه‌بندی -->
+    <div class="section-box">
+      <h2>بودجه‌بندی</h2>
+      <div class="budget-img-container" onclick="openLightbox()">
+        <img src="https://uploadkon.ir/uploads/41aa28_267606805455957466882-277768670446898-page001.jpg" alt="بودجه بندی آزمون‌ها">
+      </div>
+      <p style="text-align: center; margin-top: 15px; font-size: 0.9rem; color: rgba(255,255,255,0.5);">برای بزرگ‌نمایی روی عکس کلیک کنید</p>
+    </div>
+
+    <!-- بخش جدول آزمون‌ها -->
+    <div class="section-box">
+      <h2>آزمون‌های داخلی</h2>
+      <div style="margin-bottom: 20px; color: rgba(255,255,255,0.8); font-weight: bold;">درس زیست و زمین</div>
+
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr><th>عنوان آزمون</th><th>دانلود فایل</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>۱۴۰۰ پیش آزمون تشریحی</td><td><a href="https://uploadkon.ir/uploads/183828_2601400.pdf" target="_blank" class="download-btn">دانلود PDF</a></td></tr>
+            <tr><td>۱۴۰۰ آزمون تشریحی (۱)</td><td><a href="https://uploadkon.ir/uploads/711028_261400-1.pdf" target="_blank" class="download-btn">دانلود PDF</a></td></tr>
+            <tr><td>۱۴۰۰ آزمون تشریحی (۲)</td><td><a href="https://uploadkon.ir/uploads/a92628_261400-2.pdf" target="_blank" class="download-btn">دانلود PDF</a></td></tr>
+            <tr><td>۱۴۰۰ آزمون تشریحی (۳)</td><td><a href="https://uploadkon.ir/uploads/361728_261400-3.pdf" target="_blank" class="download-btn">دانلود PDF</a></td></tr>
+            <tr><td>۱۴۰۰ آزمون تشریحی (۴)</td><td><a href="https://uploadkon.ir/uploads/04cf28_261400-4.pdf" target="_blank" class="download-btn">دانلود PDF</a></td></tr>
+            <tr><td>۱۴۰۰ آزمون تشریحی (۵)</td><td><a href="https://uploadkon.ir/uploads/d2c128_261400-5.pdf" target="_blank" class="download-btn">دانلود PDF</a></td></tr>
+            <tr><td>۱۴۰۱ آزمون تشریحی</td><td><a href="https://uploadkon.ir/uploads/d76c28_261401.pdf" target="_blank" class="download-btn">دانلود PDF</a></td></tr>
+            <tr><td>۱۴۰۱ پیش آزمون تشریحی</td><td><a href="https://uploadkon.ir/uploads/285b28_2601401.pdf" target="_blank" class="download-btn">دانلود PDF</a></td></tr>
+            <tr><td>۱۴۰۲ پیش آزمون تشریحی</td><td><a href="https://uploadkon.ir/uploads/23f828_2601402.pdf" target="_blank" class="download-btn">دانلود PDF</a></td></tr>
+            <tr><td>۱۴۰۲ آزمون تشریحی</td><td><a href="https://uploadkon.ir/uploads/a7c628_261402.pdf" target="_blank" class="download-btn">دانلود PDF</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-alert">
+        <b>توجه:</b> این ۵ نوع آزمون مربوط به سال ۱۴۰۰ می‌باشد و به علت آنلاین بودن آزمون‌ها به دلیل کرونا، ۵ نوع سوال برای جلوگیری از تقلب طراحی شده بود.
+      </div>
+
+      <div class="status-text">🚧 در حال بروزرسانی هستیم و به زودی آزمون‌های سال‌های ۱۴۰۳ تا ۱۴۰۵ قرار خواهد گرفت.</div>
+    </div>
+
+    <!-- بخش سایر دروس -->
+    <div class="section-box">
+      <h2>سایر دروس (حسابان، هندسه، فیزیک، شیمی، عربی و...)</h2>
+      <div class="status-text">⏳ در حال بروزرسانی و بارگذاری هستیم...</div>
+    </div>
+
+    <!-- پشتیبانی -->
+    <div class="support-section">
+      <p>در صورت بروز هرگونه مشکل، در پیام‌رسان <b>بله</b> به ادمین پیام دهید:</p>
+      <a href="https://ble.ir/Aryon_admin" target="_blank" class="ble-btn">ارتباط با ادمین در بله</a>
+    </div>
+  </div>
+
+  <!-- لایت‌باکس -->
+  <div class="lightbox" id="imageLightbox" onclick="closeLightbox()">
+    <span class="lightbox-close">&times;</span>
+    <img src="https://uploadkon.ir/uploads/41aa28_267606805455957466882-277768670446898-page001.jpg" alt="بودجه بندی بزرگ">
+  </div>
+
+  <script>
+    function openLightbox() { document.getElementById('imageLightbox').classList.add('active'); }
+    function closeLightbox() { document.getElementById('imageLightbox').classList.remove('active'); }
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLightbox(); });
+  </script>
+
+</body>
+</html>

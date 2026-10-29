@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>مهرآموز</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body, html { height: 100%; width: 100%; overflow: hidden; font-family: Tahoma, sans-serif; background-color: #000; }
+  .video-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1; }
+  .video-bg video { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+  .watermark-box { position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%); width: 260px; height: 70px; background: rgba(74, 139, 158, 0.7); backdrop-filter: blur(8px); border-radius: 15px; z-index: 2; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+  .watermark-box h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: 6px; color: #fff; text-transform: uppercase; margin: 0; text-shadow: 0 0 10px rgba(255,255,255,0.6); }
+  .brand-logo { position: fixed; top: 30px; right: 40px; z-index: 20; font-size: 2.5rem; font-weight: 900; color: #fff; text-shadow: 0 0 15px rgba(255,255,255,0.8), 0 4px 10px rgba(0,0,0,0.8); letter-spacing: 2px; display: flex; align-items: center; gap: 10px; animation: slideDown 1s ease-out; }
+  .brand-logo::before { content: ''; position: absolute; top: -10px; left: -20px; right: -20px; bottom: -10px; background: rgba(255,255,255,0.05); backdrop-filter: blur(5px); border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); z-index: -1; }
+  @keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+  .login-container { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; }
+  .login-btn { padding: 15px 50px; font-size: 1.5rem; font-weight: bold; font-family: Tahoma, sans-serif; color: #fff; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.5); border-radius: 50px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; }
+  .login-btn:hover { background: rgba(255,255,255,0.3); transform: scale(1.05); box-shadow: 0 0 20px rgba(255,255,255,0.4); }
+  .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px); z-index: 100; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; }
+  .modal-overlay.active { display: flex; opacity: 1; }
+  .modal-box { background: rgba(30, 30, 30, 0.85); border: 2px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(15px); border-radius: 25px; padding: 40px 50px; width: 90%; max-width: 500px; text-align: center; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8); transform: scale(0.8); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; }
+  .modal-overlay.active .modal-box { transform: scale(1); }
+  .modal-box h2 { color: #fff; font-size: 2rem; margin-bottom: 30px; text-shadow: 0 0 10px rgba(255, 255, 255, 0.3); }
+  .grade-buttons { display: flex; flex-direction: column; gap: 15px; }
+  .grade-btn { padding: 15px; font-size: 1.3rem; font-family: inherit; font-weight: bold; border-radius: 15px; cursor: pointer; transition: all 0.3s ease; border: 2px solid transparent; text-decoration: none; display: block; }
+  .grade-btn.active { background: linear-gradient(135deg, #4a8b9e, #2c5f6e); color: #fff; border-color: rgba(255, 255, 255, 0.4); box-shadow: 0 5px 15px rgba(74, 139, 158, 0.4); }
+  .grade-btn.active:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(74, 139, 158, 0.7); border-color: rgba(255, 255, 255, 0.8); }
+  .grade-btn.disabled { background: rgba(255, 255, 255, 0.05); color: rgba(255, 255, 255, 0.4); cursor: not-allowed; border-color: rgba(255, 255, 255, 0.1); font-size: 1.1rem; }
+  .close-modal { position: absolute; top: 15px; left: 20px; background: none; border: none; color: rgba(255,255,255,0.6); font-size: 2rem; cursor: pointer; transition: color 0.3s; }
+  .close-modal:hover { color: #fff; }
+  @media (max-width: 600px) { .watermark-box { width: 220px; height: 60px; bottom: 16%; } .watermark-box h1 { font-size: 2rem; } .login-btn { font-size: 1.2rem; padding: 12px 40px; } .brand-logo { font-size: 1.8rem; top: 20px; right: 20px; } .modal-box { padding: 30px 20px; } .modal-box h2 { font-size: 1.5rem; } }
+  @media (max-height: 500px) { .watermark-box { bottom: auto; top: 10%; width: 180px; height: 50px; } .watermark-box h1 { font-size: 1.5rem; } .login-container { top: 60%; } .login-btn { font-size: 1rem; padding: 10px 30px; } .brand-logo { font-size: 1.5rem; top: 15px; right: 15px; } }
+  @media (min-width: 1024px) { .watermark-box { width: 350px; height: 90px; bottom: 15%; } .watermark-box h1 { font-size: 3.5rem; } .login-btn { font-size: 1.8rem; padding: 20px 70px; } .brand-logo { font-size: 3rem; top: 40px; right: 60px; } }
+</style>
+</head>
+<body>
+
+  <div class="brand-logo">مهرآموز</div>
+
+  <div class="video-bg">
+    <video autoplay muted loop playsinline>
+      <source src="video.mp4" type="video/mp4">
+    </video>
+    <div class="watermark-box"><h1>Aryon</h1></div>
+  </div>
+
+  <div class="login-container">
+    <button class="login-btn" onclick="openModal()">ورود به صفحه</button>
+  </div>
+
+  <div class="modal-overlay" id="gradeModal">
+    <div class="modal-box">
+      <button class="close-modal" onclick="closeModal()">&times;</button>
+      <h2>پایه‌ت رو انتخاب کن</h2>
+      <div class="grade-buttons">
+        <a href="Home9.html" class="grade-btn active">نهم</a>
+        <div class="grade-btn disabled">هشتم (ساخته نشده)</div>
+        <div class="grade-btn disabled">هفتم (ساخته نشده)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- کدهای جاوا اسکریپت مستقیم اینجا -->
+  <script>
+    function openModal() { document.getElementById('gradeModal').classList.add('active'); }
+    function closeModal() { document.getElementById('gradeModal').classList.remove('active'); }
+    document.getElementById('gradeModal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+  </script>
+</body>
+</html>
